@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-3</title>
+</head>
+<body>
+    <h3>Розробити клас MultChecker для перевірки таблиці множення <br>
+        ---------- Поля ---------- <br>
+            Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7),
+            Кількість правильних відповідей,
+            Кількість неправильних відповідей. <br>
+        ---------- Методи ---------- <br>
+            Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване),
+            Перевірка правильності вказаної відповіді,
+            render.
+        </h3>
+
+    <script>
+
+        class MultiChecker {
+            constructor(number, correct = 0, wrong = 0) {
+                this.number = number
+                this.correct = correct
+                this.wrong = wrong
+                this.randomMultiplier = this.getRandomNumber(); // Зберігаємо випадковий множник при створенні
+            }
+
+            getRandomNumber() {
+                let randomNumber = 1 + Math.floor(Math.random() * 9);
+                return randomNumber
+            }
+
+            getCorrectAnswer() {
+                return this.number * this.randomMultiplier
+            }
+
+            getWrongAnswer() {
+                let wrongAnswer
+                do {
+                    wrongAnswer = this.getRandomNumber() * this.getRandomNumber();
+                } while (wrongAnswer === this.getCorrectAnswer());
+                return wrongAnswer
+            }
+
+            checkAnswer(userAnswer) {
+                if (userAnswer === this.getCorrectAnswer()) {
+                    this.correct++
+                    return true
+                } else {
+                    this.wrong++
+                    return false
+                }
+            }
+
+            render() {
+                return `<h3>Number to check: ${this.number} * ${this.randomMultiplier} = ${this.getCorrectAnswer()}<br>
+                    Correct answers: ${this.correct} <br>
+                    Wrong answers: ${this.wrong}</h3>`
+            }
+        }
+
+        let checkNumber = new MultiChecker(7)
+
+        let example = `${checkNumber.number} x ${checkNumber.randomMultiplier} = ?`
+        let userAnswer = parseInt(prompt(example))
+        checkNumber.checkAnswer(userAnswer)
+
+        document.write(checkNumber.render())
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-2</title>
+</head>
+<body>
+    <h3>Створити об’єкт «Авто». <br>
+        Авто <br>
+        ---------- Поля(властивості) ---------- <br>
+            Марка,
+            Розмір бака,
+            Кількість наявних літрів,
+            Кількість місць,
+            Кількість пасажирів. <br>
+            ---------- Методи (дії) ---------- <br>
+            1. Заправка на вказану кількість літрів,
+            2. Виведення кількості пасажирів,
+            3. Додавання пасажирів,
+            4. Висадка пасажирів.
+    </h3>
+
+    <script>
+
+        //1.Вводимо даннi
+        let auto = {
+            brand: 'Audi', //Марка
+            tankSize: 80, //Розмір бака
+            availableLiters: 30, //Кількість наявних літрів
+            numberSeats: 5, //Кількість місць
+            numberPassengers: 3, //Кількість пасажирів
+//-------------------------------------------------------------------------------------------
+            toString: function() {
+                return document.write(`<h4>Машина - ${this.brand}.<br> Об'єм баку - ${this.tankSize}л.<br> Заправлений на - ${this.availableLiters}л.<br> Місць - ${this.numberSeats}.<br> Пасажирів - ${this.numberPassengers}.<h3>(Додаем 3-х пасажирів, та висаджуем 4-х пасажирів)</h3></h4>`)
+                document.write(`<h3> (Додаем 3-х пасажирів, та висаджуем 4-х пасажирів) </h3>`)
+            },
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+            showRefuelingLiters: function() { //Заправка на вказану кількість літрів
+                let refuelingLiters = parseInt(prompt('Введіть кількість літрів.'))
+                let change = 0
+                let spaceInTank = this.tankSize - this.availableLiters
+                if (refuelingLiters > spaceInTank) {
+                    change = refuelingLiters - spaceInTank
+                        alert(`${change} літрів не поміститься у ваш бак.`)
+                        return document.write(`<h2>1. Ви успішно заправили ${spaceInTank}л, а ${change}л решта.</h2>`)
+
+                }
+                this.availableLiters += refuelingLiters
+                    alert(`Успішно заправлено ${refuelingLiters} літрів.`)
+                    return document.write(`<h2>1. Ви успішно заправили ${refuelingLiters} літрів.</h2>`)
+            },
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+            showRemovalPassengers: function() { //Виведення кількості пасажирів
+                return document.write(`<h2>2. У машині ${this.numberPassengers} пасажира-/ів.</h2>`)
+            },
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+            showAddingPassengers: function(newPassengers) { //Додавання пасажирів
+                //let extraPassengers = 0
+                let spaceInCar = this.numberSeats - this.numberPassengers
+                if (newPassengers > spaceInCar) {
+                    let extraPassengers = newPassengers - spaceInCar
+                    alert(`${extraPassengers} пасажир-/ів не поміститься.`)
+                    this.numberPassengers = this.numberSeats; // Заповнюємо всі місця в машині
+                    return document.write(`<h2>3. Ви успішно посадили ${spaceInCar} пасажира-/ів, та ${extraPassengers} не помістився-/лись.</h2>`)
+                }
+                this.numberPassengers += newPassengers
+                alert(`Посадили ${newPassengers} пасажира-/ів.`)
+                return document.write(`<h2>3. Ви успішно посадили ${newPassengers} пасажира-/ів.</h2>`)
+
+            },
+//-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+            showDisembarkationPassengers: function(disembarkationPassengers) { //Висаджуємо пасажирів
+                this.numberPassengers -= disembarkationPassengers
+                return document.write(`<h2>4. У машині лишилось ${this.numberPassengers} пасажир-/ів.</h2>`)
+            },
+        }
+
+        //3.Виводимо результат
+        let autoInfo = auto.toString()
+        let getRefueling = auto.showRefuelingLiters()
+        let getPassengersAfterRefueling = auto.showRemovalPassengers()
+        let getAddPassengers = auto.showAddingPassengers(3)
+        let getDisembarkationPassengers = auto.showDisembarkationPassengers(4)
+
+    </script>
+</body>
+</html>

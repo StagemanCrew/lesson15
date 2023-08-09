@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-5</title>
+</head>
+<body>
+    <h3>Розробити клас «Керівник танців» <br>
+        ---------- Поля ---------- <br>
+            Масив імен хлопців,
+            Масив імен дівчат. <br>
+        ---------- Методи ---------- <br>
+            Метод випадкового вибору імені хлопця,
+            Метод випадкового вибору імені дівчини,
+            Метод виведення пари для танців,
+            Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців.
+    </h3>
+
+    <script>
+
+        // 1. Вводимо дані
+        class DanceLeader {
+            constructor(runPair, boysList, girlsList){
+                this.runPair = runPair
+                this.boysList = boysList
+                this.girlsList = girlsList
+            }
+            // ---------- Методи ---------- 
+            getRandomBoysName(){
+                let randIndexBoys = Math.floor(Math.random() * this.boysList.length)
+                return this.boysList[randIndexBoys]
+            }
+
+            getRandomGirlsName(){
+                let randIndexGirls = Math.floor(Math.random() * this.girlsList.length)
+                return this.girlsList[randIndexGirls]
+            }
+            run(){
+                setInterval(() => {
+                    let boyName = this.getRandomBoysName()
+                    let girlName = this.getRandomGirlsName()
+                    let message = `${boyName} + ${girlName}`
+                    //alert(message)
+                    document.write(`<h3> ${boyName} + ${girlName} </h3>`)
+                }, this.runPair)
+            }
+        }
+    
+        // 3. Виводимо результат
+        let dancingPair = new DanceLeader(3000, ['Коля', 'Петя', 'Вася', 'Рома'], ['Юля', 'Оля', 'Маша', 'Галя'])
+        dancingPair.run()
+
+    </script>
+</body>
+</html>

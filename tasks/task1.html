@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-1</title>
+</head>
+<body>
+    <h3>Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку. <br>
+        Тир <br>
+        ---------- Поля(властивості) ---------- <br>
+        Масив, у якому зберігається поле з зайцями. <br>
+        ---------- Методи (дії) ---------- <br>
+        Метод пострілу (задається позиція пострілу),
+            Виведення ігрового поля.
+    </h3>
+
+    <script>
+
+        // Об'єкт "Тир"
+        class TirGame {
+            constructor(fieldSize, bulletsNumber) {
+                this.fieldSize = fieldSize
+                this.bulletsNumber = bulletsNumber
+                this.harePosition = Math.floor(Math.random() * fieldSize)
+            }
+
+            shoot(userShot) {
+                this.bulletsNumber--
+
+                if (userShot === this.harePosition) {
+                    return `<h2>Ви влучили зайця!</h2>`
+                } else if (this.bulletsNumber > 0) {
+                    return `Промах! У вас залишилося ${this.bulletsNumber} постріл(-и).`
+                } else {
+                    return "Програш! Ви вичерпали всі постріли."
+                }
+            }
+        }
+
+        let fieldSize = parseInt(prompt('Введіть розмір поля (1 - 9).'))
+        let bulletsNumber = 3
+        let game = new TirGame(fieldSize, bulletsNumber)
+            document.write("<h3>Гра \"Вгадай позицію зайця\"</h3>")
+        let userShot
+
+        do {userShot = parseInt(prompt(`Введіть номер позиції для пострілу (1 - ${game.fieldSize}).`))
+            let result = game.shoot(userShot)
+            document.write(`<h3>${result}</h3>`)
+        } while (userShot !== game.harePosition && game.bulletsNumber > 0)
+
+    </script>
+</body>
+</html>

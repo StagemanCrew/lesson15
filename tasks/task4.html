@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-4</title>
+</head>
+<body>
+    <h3>Розробити клас Baner <br>
+        ---------- Поля ---------- <br>
+            Масив об’єктів ( графічних зображень та посилань на сайти). <br>
+        ---------- Методи ---------- <br>
+            Метод випадкового вибору об’єкта (графічного зображення та посилання),
+            метод виведення випадкового банера.
+    </h3>
+
+    <script>
+
+        //1. Вводимо даннi
+        class Banner {
+            constructor(bannerList) {
+                this.bannerList = bannerList
+            }
+
+            getRandomObject() {
+                let randIndexBanner = Math.floor(Math.random() * this.bannerList.length)
+                return this.bannerList[randIndexBanner]
+            }
+
+            displayRandomBanner() {
+                let randomBanner = this.getRandomObject()
+                document.write('<img style="width: 200px" src="' + randomBanner.image + '" alt="Banner Image">')
+                document.write('<a href="' + randomBanner.link + '">Перехід далі...</a>')
+            }
+        }
+
+        // Використання класу
+        let bannerObjects = [
+            { image: '../img/1.png', link: 'https://ru.wikipedia.org/wiki/Smokie'},
+            { image: '../img/2.png', link: 'https://www.google.com/search?q=smile&rlz=1C1CHBD_ruUA919UA919&oq=smile&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDzSAQgzNDAwajBqNKgCALACAA&sourceid=chrome&ie=UTF-8'},
+            { image: '../img/3.png', link: 'https://uk.wikipedia.org/wiki/Ray-Ban'},
+            { image: '../img/4.png', link: 'https://uk.wikipedia.org/wiki/%D0%A1%D0%BC%D0%B0%D0%B9%D0%BB'},
+        ]
+
+        let bannerInstance = new Banner(bannerObjects)
+        bannerInstance.displayRandomBanner()
+
+    </script>
+</body>
+</html>

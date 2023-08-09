@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-0</title>
+</head>
+<body>
+    <h3>Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+        Використати обидва методи стосовно обидвох об’єктів (використати call, apply).</h3>
+
+    <script>
+
+        let sumNumber = {
+            numbers: [2, 3, 4, 1, 5, 5, 9, 6, 7, 8],
+            getSumBetween: function() {
+                let minIndex = this.numbers.findIndex(num => num === Math.min(...this.numbers))// Знаходимо індекс мінімального числа
+                let maxIndex = this.numbers.findIndex(num => num === Math.max(...this.numbers))// Знаходимо індекс максимального числа
+                let sum = 0
+                for (let i = minIndex + 1; i < maxIndex; i++) {
+                    sum += this.numbers[i]
+                }
+                document.write(`<h3>Сума: ${sum}<br></h3>`)
+                document.write('<div style="border-top: 1px solid black; width:20%;"></div>')
+            }
+        }
+        document.write(`<h4>Масив суми: ${sumNumber.numbers}</h4>`)
+        sumNumber.getSumBetween()
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+        let productNumber = {
+            numbers: [2, 3, 1, 4, 1, 5, 2, 9, 6, 7, 8],
+            getProdBetween: function() {
+                let minIndex = this.numbers.findIndex(num => num === Math.min(...this.numbers))
+                let maxIndex = this.numbers.findIndex(num => num === Math.max(...this.numbers))
+                let prod = 1
+                for (let i = minIndex + 1; i < maxIndex; i++) {
+                    prod *= this.numbers[i]
+                }
+                document.write(`<h3>Добуток: ${prod}<br></h3>`)
+                document.write('<div style="border-top: 1px solid black; width:20%;"></div>')
+            }
+        }
+        document.write(`<h4>Масив добутку: ${productNumber.numbers}</h4>`)
+        productNumber.getProdBetween()
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+        document.write(`<h4>Масив суми: ${sumNumber.numbers}</h4>`)
+        let productSumNumber = productNumber.getProdBetween.call(sumNumber)
+
+        document.write(`<h4>Масив добутку: ${productNumber.numbers}</h4>`)
+        let sumProductNumber = sumNumber.getSumBetween.apply(productNumber)
+
+    </script>
+</body>
+</html>
